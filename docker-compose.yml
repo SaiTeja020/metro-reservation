@@ -1,0 +1,20 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: metro_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root1234
+      MYSQL_DATABASE: metrodb
+    volumes:
+      - metro_data:/var/lib/mysql
+
+  app:
+    build: .
+    container_name: metro-app
+    ports:
+      - "8086:8080"
+    depends_on:
+      - db
+
+volumes:
+  metro_data:
